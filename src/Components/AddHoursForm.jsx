@@ -1,15 +1,32 @@
-import React from 'react'
-import { Form } from 'react-router-dom'
+import React, { useEffect, useRef } from 'react'
+import { Form, useFetcher } from 'react-router-dom'
 
 // ASSETS
 import { HiCurrencyPound } from 'react-icons/hi'
 
 const AddHoursForm = () => {
+
+    // stores the form's state
+    const fetcher = useFetcher()
+    const isSubmitting = fetcher.state === 'submitting'
+
+    const formRef = useRef();
+    const focusRef = useRef(); // sets focus to first input
+
+    // clears the form
+    useEffect(() => {
+        if (!isSubmitting) {
+            formRef.current.reset()
+            focusRef.current.focus()
+        }
+    }, [isSubmitting])
+
     return (
         <div className='form-wrapper'>
             <h2 className='h3'>New Weekly Invoice</h2>
-            <Form method='post'
+            <fetcher.Form method='post'
                 className='grid-sm'
+                ref={formRef}
             >
                 <div className='grid-xs'>
                     <label htmlFor='newHours'>Child Name</label>
@@ -18,7 +35,8 @@ const AddHoursForm = () => {
                         name='name'
                         id='name'
                         placeholder='David'
-                        required />
+                        required
+                        ref={focusRef} />
                 </div>
 
                 <div className='grid-xs'>
@@ -51,7 +69,7 @@ const AddHoursForm = () => {
                 <button type='submit' className='btn btn--dark'>
                     <HiCurrencyPound />Add Child
                 </button>
-            </Form>
+            </fetcher.Form>
         </div>
     )
 }

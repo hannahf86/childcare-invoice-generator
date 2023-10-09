@@ -1,4 +1,4 @@
-// REACT-ROUTER-ROM 
+// REACT-ROUTER-DOM 
 import { useLoaderData } from "react-router-dom";
 
 // SCENES
@@ -9,7 +9,7 @@ import AddHoursForm from "../Components/AddHoursForm";
 import { toast } from "react-toastify";
 
 //  HELPERS
-import { fetchData, createInvoice } from "../Utilities/Helpers"
+import { fetchData, createInvoice } from "../Utilities/Helpers";
 
 // LOADERS
 export function dashboardLoader() {
