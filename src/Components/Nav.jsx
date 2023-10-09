@@ -14,7 +14,7 @@ const Nav = ({ userName }) => {
         to='/'
         aria-label='Go to Home'
       >
-        <img src={logo} height={60} />
+        <img src={logo} height={40} />
         <span>Childcare Invoice Generator</span>
       </NavLink>
 
@@ -30,7 +30,7 @@ const Nav = ({ userName }) => {
             }}
           >
             <button type='submit' className='btn btn--warning'>
-              <span><HiTrash width={20} />Delete User</span>
+              <span>Delete User</span>
             </button>
 
           </Form>
