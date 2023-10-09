@@ -3,6 +3,8 @@ export const fetchData = (key) => {
     return JSON.parse(localStorage.getItem(key));
 };
 
+export const waait = () => new Promise(res => setTimeout(res, Math.random() * 800))
+
 // DELETE ITEM
 export const deleteItem = ({ key }) => {
     return localStorage.removeItem(key)
@@ -16,14 +18,12 @@ const generateRandomColor = () => {
 
 // CREATE INVOICE
 export const createInvoice = ({
-    name, hours, funding,
+    name,
 }) => {
     const newItem = {
         id: crypto.randomUUID(),
         createdAt: Date.now(),
         name: name,
-        hours: +hours,
-        funding: funding,
         color: generateRandomColor(),
     }
     const existingInvoices = fetchData('invoices') ?? []

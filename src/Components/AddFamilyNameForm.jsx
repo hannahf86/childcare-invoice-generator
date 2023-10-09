@@ -2,16 +2,18 @@ import React, { useEffect, useRef } from 'react'
 import { Form, useFetcher } from 'react-router-dom'
 
 // ASSETS
-import { HiCurrencyPound } from 'react-icons/hi'
+import { HiPlus } from 'react-icons/hi'
 
-const AddHoursForm = () => {
+const AddFamilyNameForm = () => {
 
     // stores the form's state
     const fetcher = useFetcher()
     const isSubmitting = fetcher.state === 'submitting'
 
     const formRef = useRef();
-    const focusRef = useRef(); // sets focus to first input
+
+    // sets focus to first input
+    const focusRef = useRef();
 
     // clears the form
     useEffect(() => {
@@ -29,17 +31,17 @@ const AddHoursForm = () => {
                 ref={formRef}
             >
                 <div className='grid-xs'>
-                    <label htmlFor='newHours'>Child Name</label>
+                    <label htmlFor='newFamily'>Family Name</label>
                     <input
                         type='text'
                         name='name'
                         id='name'
-                        placeholder='David'
+                        placeholder='e.g. Smith'
                         required
                         ref={focusRef} />
                 </div>
 
-                <div className='grid-xs'>
+                {/* <div className='grid-xs'>
                     <label htmlFor='newHours'>Hours per week</label>
                     <input
                         type='number'
@@ -62,16 +64,19 @@ const AddHoursForm = () => {
                         <option value="3 year old, 30 hours funding">3yrs 30hrs</option>
                         <option value="No funding">NONE</option>
                     </select>
-                </div>
+                </div> */}
 
                 <input type='hidden' name='_action' value='createInvoice' />
 
-                <button type='submit' className='btn btn--dark'>
-                    <HiCurrencyPound />Add Child
+                <button type='submit' className='btn btn--dark' disabled={isSubmitting}>
+                    {
+                        isSubmitting ? <span>Thinking...</span> :
+                            <><HiPlus size={20}/>Add</>
+                    }
                 </button>
             </fetcher.Form>
         </div>
     )
 }
 
-export default AddHoursForm
+export default AddFamilyNameForm

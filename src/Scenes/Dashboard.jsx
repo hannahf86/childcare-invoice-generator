@@ -3,13 +3,13 @@ import { useLoaderData } from "react-router-dom";
 
 // SCENES
 import Intro from "./Intro";
-import AddHoursForm from "../Components/AddHoursForm";
+import AddFamilyNameForm from "../Components/AddFamilyNameForm";
 
 // TOAST
 import { toast } from "react-toastify";
 
 //  HELPERS
-import { fetchData, createInvoice } from "../Utilities/Helpers";
+import { fetchData, createInvoice, waait } from "../Utilities/Helpers";
 
 // LOADERS
 export function dashboardLoader() {
@@ -20,6 +20,8 @@ export function dashboardLoader() {
 
 // ACTIONS
 export async function dashboardAction({ request }) {
+    await waait()
+
     const data = await request.formData();
     const { _action, ...values } = Object.fromEntries(data)
 
@@ -37,8 +39,8 @@ export async function dashboardAction({ request }) {
         try {
             createInvoice({
                 name: values.name,
-                hours: values.hoursPerWeek,
-                funding: values.funding,
+                // hours: values.hoursPerWeek,
+                // funding: values.funding,
             })
             return toast.success("Weekly hours added!")
         } catch (e) {
@@ -62,7 +64,7 @@ const Dashboard = () => {
 
                         <div className="grid-lg">
                             <div className="flex-lg">
-                                <AddHoursForm />
+                                <AddFamilyNameForm />
                             </div>
                         </div>
                     </div>
