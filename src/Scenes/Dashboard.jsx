@@ -3,39 +3,69 @@ import { useLoaderData } from "react-router-dom";
 
 // SCENES
 import Intro from "./Intro";
+import AddHoursForm from "../Components/AddHoursForm";
 
 // TOAST
 import { toast } from "react-toastify";
 
 //  HELPERS
-import { fetchData } from "../Utilities/Helpers"
+import { fetchData, createInvoice } from "../Utilities/Helpers"
 
 // LOADERS
 export function dashboardLoader() {
     const userName = fetchData("userName");
-    return { userName }
+    const invoices = fetchData("invoices");
+    return { userName, invoices }
 }
 
 // ACTIONS
 export async function dashboardAction({ request }) {
     const data = await request.formData();
-    try {
-        const formData = Object.fromEntries(data);
-        localStorage.setItem('userName', JSON.stringify(formData.userName));
-        return toast.success(`Welcome, ${formData.userName}!`)
-    } catch (e) {
-        throw new Error("There was a problem creating your account")
+    const { _action, ...values } = Object.fromEntries(data)
+
+    // new user submission
+    if (_action === "newUser") {
+        try {
+            localStorage.setItem("userName", JSON.stringify(values.userName))
+            return toast.success(`Welcome, ${values.userName}`)
+        } catch (e) {
+            throw new Error("There was a problem creating your account.")
+        }
+    }
+
+    if (_action === "createInvoice") {
+        try {
+            createInvoice({
+                name: values.name,
+                hours: values.hoursPerWeek,
+                funding: values.funding,
+            })
+            return toast.success("Weekly hours added!")
+        } catch (e) {
+            throw new Error("There was a problem creating your invoice.")
+        }
     }
 }
 
 const Dashboard = () => {
-    const { userName } = useLoaderData()
+    const { userName, invoices } = useLoaderData()
 
     return (
         <>
             {
                 userName ? (
-                    <p>{userName}</p>
+                    <div className="dashboard">
+                        <h1>Welcome back, <span className="accent">{userName}</span></h1>
+                        <div className="gird-sm">
+                            {/* {invoices ? (): ()} */}
+                        </div>
+
+                        <div className="grid-lg">
+                            <div className="flex-lg">
+                                <AddHoursForm />
+                            </div>
+                        </div>
+                    </div>
                 ) : <Intro />
             }
         </>
