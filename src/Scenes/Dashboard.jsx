@@ -4,6 +4,7 @@ import { useLoaderData } from "react-router-dom";
 // SCENES
 import Intro from "./Intro";
 import AddFamilyNameForm from "../Components/AddFamilyNameForm";
+import AddHoursForm from "../Components/AddHoursForm";
 
 // TOAST
 import { toast } from "react-toastify";
@@ -42,7 +43,7 @@ export async function dashboardAction({ request }) {
                 // hours: values.hoursPerWeek,
                 // funding: values.funding,
             })
-            return toast.success("Weekly hours added!")
+            return toast.success("Family name added")
         } catch (e) {
             throw new Error("There was a problem creating your invoice.")
         }
@@ -58,16 +59,27 @@ const Dashboard = () => {
                 userName ? (
                     <div className="dashboard">
                         <h1>Welcome back, <span className="accent">{userName}</span></h1>
-                        <div className="gird-sm">
-                            {/* {invoices ? (): ()} */}
+                        <div className="grid-sm">
+                            {
+                                invoices && invoices.length > 0
+                                    ? (
+                                        < div className="grid-lg">
+                                            <div className="flex-lg">
+                                                <AddFamilyNameForm />
+                                                <AddHoursForm invoices={invoices} />
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div className="grid-sm">
+                                            <p>Add a Family Name below to get started.</p>
+                                            <AddFamilyNameForm />
+                                        </div>
+                                    )
+                            }
                         </div>
 
-                        <div className="grid-lg">
-                            <div className="flex-lg">
-                                <AddFamilyNameForm />
-                            </div>
-                        </div>
-                    </div>
+
+                    </div >
                 ) : <Intro />
             }
         </>
