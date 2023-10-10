@@ -10,7 +10,7 @@ import AddHoursForm from "../Components/AddHoursForm";
 import { toast } from "react-toastify";
 
 //  HELPERS
-import { fetchData, createInvoice, waait } from "../Utilities/Helpers";
+import { fetchData, createInvoice, waait, addHours } from "../Utilities/Helpers";
 
 // LOADERS
 export function dashboardLoader() {
@@ -36,14 +36,27 @@ export async function dashboardAction({ request }) {
         }
     }
 
+    // new invoice submission
     if (_action === "createInvoice") {
         try {
             createInvoice({
                 name: values.name,
-                // hours: values.hoursPerWeek,
-                // funding: values.funding,
             })
             return toast.success("Family name added")
+        } catch (e) {
+            throw new Error("There was a problem creating your invoice.")
+        }
+    }
+
+    // adding hours per child
+    if (_action === "addHours") {
+        try {
+            addHours({
+                name: values.name,
+                hours: values.hoursPerWeek,
+                funding: values.funding,
+            })
+            return toast.success("Child hours and funding added")
         } catch (e) {
             throw new Error("There was a problem creating your invoice.")
         }

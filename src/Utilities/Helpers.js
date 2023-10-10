@@ -29,3 +29,19 @@ export const createInvoice = ({
     const existingInvoices = fetchData('invoices') ?? []
     return localStorage.setItem('invoices', JSON.stringify([...existingInvoices, newItem]))
 }
+
+// ADD HOURS AND FUNDING
+export const addHours = ({
+    name, hours, funding,
+}) => {
+    const newItem = {
+        id: crypto.randomUUID(),
+        createdAt: Date.now(),
+        name: name,
+        hours: +hours,
+        funding: funding,
+        color: generateRandomColor(),
+    }
+    const existingHours = fetchData('invoices') ?? [];
+    return localStorage.setItem('invoices', JSON.stringify([...existingHours, newItem]))
+}
