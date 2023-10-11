@@ -31,16 +31,16 @@ export const createInvoice = ({
 }
 
 // ADD HOURS AND FUNDING
-export const addHours = ({
-    name, hours, funding,
+export const addChild = ({
+    childName, hours, funding, invoiceId
 }) => {
     const newItem = {
         id: crypto.randomUUID(),
         createdAt: Date.now(),
-        name: name,
+        childName: childName,
         hours: +hours,
         funding: funding,
-        color: generateRandomColor(),
+        invoiceId: invoiceId
     }
     const existingHours = fetchData('invoices') ?? [];
     return localStorage.setItem('invoices', JSON.stringify([...existingHours, newItem]))

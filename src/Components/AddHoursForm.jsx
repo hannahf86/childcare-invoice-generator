@@ -33,6 +33,17 @@ const AddHoursForm = ({ invoices }) => {
             >
 
                 <div className='grid-xs'>
+                    <label htmlFor='childName'>Child name</label>
+                    <input
+                        type='text'
+                        name='childName'
+                        id='childName'
+                        placeholder='e.g. John'
+                        required
+                        ref={focusRef} />
+                </div>
+
+                <div className='grid-xs'>
                     <label htmlFor='hoursPerWeek'>Hours per week</label>
                     <input
                         type='number'
@@ -41,8 +52,7 @@ const AddHoursForm = ({ invoices }) => {
                         id='hoursPerWeek'
                         placeholder='e.g. 24'
                         inputMode='decimal'
-                        required
-                        ref={focusRef} />
+                        required />
                 </div>
 
                 <div className='grid-xs'>
@@ -73,7 +83,7 @@ const AddHoursForm = ({ invoices }) => {
                     </select>
                 </div>
 
-                <input type='hidden' name='_action' value='addHours' />
+                <input type='hidden' name='_action' value='addChild' />
 
                 <button type='submit' className='btn btn--dark' disabled={isSubmitting}>
                     {
@@ -82,8 +92,8 @@ const AddHoursForm = ({ invoices }) => {
                     }
                 </button>
 
-            </fetcher.Form>
-        </div>
+            </fetcher.Form >
+        </div >
 
     )
 }
