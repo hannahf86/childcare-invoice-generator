@@ -5,21 +5,25 @@ import { useLoaderData } from "react-router-dom";
 import Intro from "./Intro";
 import AddFamilyNameForm from "../Components/AddFamilyNameForm";
 import AddHoursForm from "../Components/AddHoursForm";
+import Child from "../Components/Child";
 
 // TOAST
 import { toast } from "react-toastify";
 
 //  HELPERS
-import { fetchData, createInvoice, waait, addChild } from "../Utilities/Helpers";
+import { fetchData, createInvoice, waait, } from "../Utilities/Helpers";
 
 // LOADERS
 export function dashboardLoader() {
     const userName = fetchData("userName");
     const invoices = fetchData("invoices");
-    return { userName, invoices }
+    const newChild = fetchData("newChild");
+    return { userName, invoices, newChild }
 }
 
 // ACTIONS
+
+// add button delay
 export async function dashboardAction({ request }) {
     await waait()
 
@@ -41,6 +45,9 @@ export async function dashboardAction({ request }) {
         try {
             createInvoice({
                 name: values.name,
+                childName: values.childName,
+                hours: values.hoursPerWeek,
+                funding: values.funding,
             })
             return toast.success("Family name added")
         } catch (e) {
@@ -49,19 +56,19 @@ export async function dashboardAction({ request }) {
     }
 
     // adding hours per child
-    if (_action === "addChild") {
-        try {
-            addChild({
-                childName: values.childName,
-                hours: values.hoursPerWeek,
-                funding: values.funding,
-                invoiceId: values.invoiceId,
-            })
-            return toast.success("Child hours and funding added")
-        } catch (e) {
-            throw new Error("There was a problem creating your invoice.")
-        }
-    }
+    // if (_action === "addChild") {
+    //     try {
+    //         addChild({
+    //             childName: values.childName,
+    //             hours: values.hoursPerWeek,
+    //             funding: values.funding,
+    //             invoiceId: values.invoiceId,
+    //         })
+    //         return toast.success("Child hours and funding added")
+    //     } catch (e) {
+    //         throw new Error("There was a problem creating your invoice.")
+    //     }
+    // }
 }
 
 const Dashboard = () => {
@@ -80,8 +87,19 @@ const Dashboard = () => {
                                         < div className="grid-lg">
                                             <div className="flex-lg">
                                                 <AddFamilyNameForm />
-                                                <AddHoursForm invoices={invoices} />
+                                                {/* <AddHoursForm invoices={invoices} /> */}
                                             </div>
+
+                                            {/* EXISTING CHILDREN */}
+                                            <h2>Current Invoice Info</h2>
+                                            <div className="budgets">
+                                                {
+                                                    invoices.map((invoice) => (
+                                                        <Child key={invoice.id} invoice={invoice} />
+                                                    ))
+                                                }
+                                            </div>
+
                                         </div>
                                     ) : (
                                         <div className="grid-sm">

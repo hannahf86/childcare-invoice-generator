@@ -3,6 +3,7 @@ export const fetchData = (key) => {
     return JSON.parse(localStorage.getItem(key));
 };
 
+// BUTTON DELAY HELPER
 export const waait = () => new Promise(res => setTimeout(res, Math.random() * 800))
 
 // DELETE ITEM
@@ -18,30 +19,28 @@ const generateRandomColor = () => {
 
 // CREATE INVOICE
 export const createInvoice = ({
-    name,
+    name, childName, hours, funding,
 }) => {
     const newItem = {
         id: crypto.randomUUID(),
         createdAt: Date.now(),
         name: name,
+        childName: childName,
+        hours: +hours,
+        funding: funding,
         color: generateRandomColor(),
     }
     const existingInvoices = fetchData('invoices') ?? []
     return localStorage.setItem('invoices', JSON.stringify([...existingInvoices, newItem]))
 }
 
-// ADD HOURS AND FUNDING
-export const addChild = ({
-    childName, hours, funding, invoiceId
-}) => {
-    const newItem = {
-        id: crypto.randomUUID(),
-        createdAt: Date.now(),
-        childName: childName,
-        hours: +hours,
-        funding: funding,
-        invoiceId: invoiceId
-    }
-    const existingHours = fetchData('invoices') ?? [];
-    return localStorage.setItem('invoices', JSON.stringify([...existingHours, newItem]))
+// FORMATTING
+
+// currency
+export const formatCurrency = (amt) => {
+    return amt.toLocalString(undefined, {
+        style: 'currency',
+        current: 'BPS'
+
+    })
 }
