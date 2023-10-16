@@ -19,7 +19,7 @@ const generateRandomColor = () => {
 
 // CREATE INVOICE
 export const createInvoice = ({
-    name, childName, hours, funding,
+    name, childName, hours, funding, totalAmount
 }) => {
     const newItem = {
         id: crypto.randomUUID(),
@@ -28,6 +28,7 @@ export const createInvoice = ({
         childName: childName,
         hours: +hours,
         funding: funding,
+        totalAmount: totalAmount,
         color: generateRandomColor(),
     }
     const existingInvoices = fetchData('invoices') ?? []
@@ -38,9 +39,8 @@ export const createInvoice = ({
 
 // currency
 export const formatCurrency = (amt) => {
-    return amt.toLocalString(undefined, {
-        style: 'currency',
-        current: 'BPS'
-
+    return amt.toLocaleString(undefined, {
+        style: "currency",
+        currency: "GBP"
     })
 }

@@ -3,15 +3,16 @@ import { useLoaderData } from "react-router-dom";
 
 // SCENES
 import Intro from "./Intro";
-import AddFamilyNameForm from "../Components/AddFamilyNameForm";
-import AddHoursForm from "../Components/AddHoursForm";
-import Child from "../Components/Child";
+import AddChildForm from "../Components/AddChildForm";
+import FamilyCard from "../Components/FamilyCard";
 
 // TOAST
 import { toast } from "react-toastify";
 
 //  HELPERS
 import { fetchData, createInvoice, waait, } from "../Utilities/Helpers";
+import AddFamilyForm from "../Components/AddFamilyForm";
+
 
 // LOADERS
 export function dashboardLoader() {
@@ -48,27 +49,13 @@ export async function dashboardAction({ request }) {
                 childName: values.childName,
                 hours: values.hoursPerWeek,
                 funding: values.funding,
+                totalAmount: values.totalAmount,
             })
             return toast.success("Family name added")
         } catch (e) {
             throw new Error("There was a problem creating your invoice.")
         }
     }
-
-    // adding hours per child
-    // if (_action === "addChild") {
-    //     try {
-    //         addChild({
-    //             childName: values.childName,
-    //             hours: values.hoursPerWeek,
-    //             funding: values.funding,
-    //             invoiceId: values.invoiceId,
-    //         })
-    //         return toast.success("Child hours and funding added")
-    //     } catch (e) {
-    //         throw new Error("There was a problem creating your invoice.")
-    //     }
-    // }
 }
 
 const Dashboard = () => {
@@ -85,9 +72,9 @@ const Dashboard = () => {
                                 invoices && invoices.length > 0
                                     ? (
                                         < div className="grid-lg">
+
                                             <div className="flex-lg">
-                                                <AddFamilyNameForm />
-                                                {/* <AddHoursForm invoices={invoices} /> */}
+                                                <AddChildForm />
                                             </div>
 
                                             {/* EXISTING CHILDREN */}
@@ -95,7 +82,7 @@ const Dashboard = () => {
                                             <div className="budgets">
                                                 {
                                                     invoices.map((invoice) => (
-                                                        <Child key={invoice.id} invoice={invoice} />
+                                                        <FamilyCard key={invoice.id} invoice={invoice} />
                                                     ))
                                                 }
                                             </div>
@@ -104,13 +91,11 @@ const Dashboard = () => {
                                     ) : (
                                         <div className="grid-sm">
                                             <p>Add a Family Name below to get started.</p>
-                                            <AddFamilyNameForm />
+                                            <AddChildForm />
                                         </div>
                                     )
                             }
                         </div>
-
-
                     </div >
                 ) : <Intro />
             }
