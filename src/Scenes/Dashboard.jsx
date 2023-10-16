@@ -18,7 +18,8 @@ import { fetchData, familyName, addChild, waait, } from "../Utilities/Helpers";
 export function dashboardLoader() {
     const userName = fetchData("userName");
     const familyName = fetchData("familyName");
-    return { userName, familyName }
+    const addChild = fetchData("addChild");
+    return { userName, familyName, addChild }
 }
 
 
@@ -92,10 +93,10 @@ const Dashboard = () => {
                                                 <AddChildForm familyName={familyName} />
                                             </div>
                                             <h2>Existing Invoices</h2>
-                                            <div className="budgets">
+                                            <div className="invoices">
                                                 {
-                                                    familyName.map((family) => (
-                                                        <ChildSummary key={family.id} family={family} />
+                                                    addChild.map((child) => (
+                                                        <ChildSummary key={child.id} child={child} />
                                                     ))
                                                 }
                                             </div>

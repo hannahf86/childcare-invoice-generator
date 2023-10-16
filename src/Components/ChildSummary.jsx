@@ -2,8 +2,8 @@ import React from 'react'
 
 
 
-const ChildSummary = ({ family }) => {
-    const { name, hoursPerWeek, funding, color } = family;
+const ChildSummary = ({ child }) => {
+    const { name, hoursPerWeek, funding, color } = child;
 
     return (
         <div className='invoice'
