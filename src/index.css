@@ -1,4 +1,4 @@
-/* CSS OPTIMISED FOR SPEED */
+/* ⚠️ CSS optimized for the tutorial, not for expanding to a larger site. ⚠️ */
 
 *,
 *::before,
@@ -437,23 +437,22 @@ select {
   z-index: -1;
 }
 
-.invoice-inputs {
+.expense-inputs {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 100%;
   gap: var(--space-md);
 }
 
 @media screen and (max-width: 725px) {
-  .invoice-inputs {
+  .expense-inputs {
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
   }
 }
 
-/* budgets */
-.budgets {
+/* INVOICES */
+.invoices {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -462,7 +461,7 @@ select {
   gap: var(--space-md);
 }
 
-.budget {
+.invoice {
   --backdrop: var(--accent);
   display: -ms-grid;
   display: grid;
@@ -481,7 +480,7 @@ select {
   color: hsl(var(--backdrop));
 }
 
-.budget>.flex-sm {
+.invoice>.flex-sm {
   padding-top: var(--space-sm);
   display: -webkit-box;
   display: -ms-flexbox;
@@ -491,7 +490,7 @@ select {
   justify-content: center;
 }
 
-.progress-text {
+.card-text {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -504,11 +503,11 @@ select {
   gap: var(--space-lg);
 }
 
-.progress-text :nth-child(2) {
+.card-text :nth-child(2) {
   text-align: right;
 }
 
-.progress-text:nth-of-type(2) :nth-child(2) {
+.card-text:nth-of-type(2) :nth-child(2) {
   color: hsl(var(--muted));
 }
 

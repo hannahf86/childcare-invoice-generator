@@ -13,34 +13,39 @@ export const deleteItem = ({ key }) => {
 
 // RANDOM COLOR
 const generateRandomColor = () => {
-    const existingInvoiceLength = fetchData('invoices')?.length ?? 0;
+    const existingInvoiceLength = fetchData('familyName')?.length ?? 0;
     return `${existingInvoiceLength * 34} 65% 50%`
 }
 
 // CREATE INVOICE
-export const createInvoice = ({
-    name, childName, hours, funding, totalAmount
+export const familyName = ({
+    familyName
+}) => {
+    const newItem = {
+        id: crypto.randomUUID(),
+        createdAt: Date.now(),
+        familyName: familyName,
+        color: generateRandomColor(),
+    }
+    const existingFamilies = fetchData('familyName') ?? [];
+    return localStorage.setItem('familyName', JSON.stringify([...existingFamilies, newItem]))
+}
+
+// CHILD DETAILS
+export const addChild = ({
+    name, addChild, childsAge, hoursPerWeek, funding, familyNameId
 }) => {
     const newItem = {
         id: crypto.randomUUID(),
         createdAt: Date.now(),
         name: name,
-        childName: childName,
-        hours: +hours,
+        addChild: addChild,
+        childsAge: +childsAge,
+        hoursPerWeek: +hoursPerWeek,
         funding: funding,
-        totalAmount: totalAmount,
-        color: generateRandomColor(),
+        familyNameId: familyNameId,
     }
-    const existingInvoices = fetchData('invoices') ?? []
-    return localStorage.setItem('invoices', JSON.stringify([...existingInvoices, newItem]))
+    const existingChildren = fetchData('addChild') ?? [];
+    return localStorage.setItem('addChild', JSON.stringify([...existingChildren, newItem]))
 }
 
-// FORMATTING
-
-// currency
-export const formatCurrency = (amt) => {
-    return amt.toLocaleString(undefined, {
-        style: "currency",
-        currency: "GBP"
-    })
-}

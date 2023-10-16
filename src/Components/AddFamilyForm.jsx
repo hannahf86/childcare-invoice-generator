@@ -1,6 +1,9 @@
 import React, { useEffect, useRef } from 'react'
 import { useFetcher } from 'react-router-dom'
 
+// ICONS
+import { HiPlus } from 'react-icons/hi'
+
 const AddFamilyForm = () => {
 
 
@@ -31,17 +34,29 @@ const AddFamilyForm = () => {
                     className='grid-sm'
                     ref={formRef}
                 >
-                    <div className='grid-xs'>
-                        <label htmlFor='newFamily'>Family Name</label>
-                        <input
-                            type='text'
-                            name='name'
-                            id='name'
-                            placeholder='e.g. Smith'
-                            required
-                            ref={focusRef}
-                        />
+                    <div className='invoice-inputs'>
+                        <div className='grid-xs'>
+                            <label htmlFor='familyName'>Family Name</label>
+                            <input
+                                type='text'
+                                name='familyName'
+                                id='familyName'
+                                placeholder='e.g. Smith'
+                                required
+                                ref={focusRef}
+                            />
+                        </div>
                     </div>
+
+                    {/* NEW USER SECRET INPUT */}
+                    <input type="hidden" name="_action" value="familyName" />
+
+                    <button type='submit' className='btn btn--dark' disabled={isSubmitting}>
+                        {
+                            isSubmitting ? <span>Thinking...</span> :
+                                <><HiPlus size={20} />Add Family</>
+                        }
+                    </button>
                 </fetcher.Form>
             </div>
 

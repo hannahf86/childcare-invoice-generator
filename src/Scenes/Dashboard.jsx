@@ -3,24 +3,26 @@ import { useLoaderData } from "react-router-dom";
 
 // SCENES
 import Intro from "./Intro";
+import AddFamilyForm from "../Components/AddFamilyForm";
 import AddChildForm from "../Components/AddChildForm";
-import FamilyCard from "../Components/FamilyCard";
+import ChildSummary from "../Components/ChildSummary";
+// import Table from "../Components/Table";
 
 // TOAST
 import { toast } from "react-toastify";
 
 //  HELPERS
-import { fetchData, createInvoice, waait, } from "../Utilities/Helpers";
-import AddFamilyForm from "../Components/AddFamilyForm";
-
+import { fetchData, familyName, addChild, waait, } from "../Utilities/Helpers";
 
 // LOADERS
 export function dashboardLoader() {
     const userName = fetchData("userName");
-    const invoices = fetchData("invoices");
-    const newChild = fetchData("newChild");
-    return { userName, invoices, newChild }
+    const familyName = fetchData("familyName");
+    return { userName, familyName }
 }
+
+
+
 
 // ACTIONS
 
@@ -41,17 +43,29 @@ export async function dashboardAction({ request }) {
         }
     }
 
-    // new invoice submission
-    if (_action === "createInvoice") {
+    // new family added
+    if (_action === "familyName") {
         try {
-            createInvoice({
-                name: values.name,
-                childName: values.childName,
-                hours: values.hoursPerWeek,
-                funding: values.funding,
-                totalAmount: values.totalAmount,
+            familyName({
+                familyName: values.familyName,
             })
             return toast.success("Family name added")
+        } catch (e) {
+            throw new Error("There was a problem creating your invoice.")
+        }
+    }
+
+    // add child
+    if (_action === "addChild") {
+        try {
+            addChild({
+                name: values.addChild,
+                childsAge: values.childsAge,
+                hoursPerWeek: values.hoursPerWeek,
+                funding: values.funding,
+                familyNameId: values.selectedFamily
+            })
+            return toast.success("New child added!")
         } catch (e) {
             throw new Error("There was a problem creating your invoice.")
         }
@@ -59,7 +73,7 @@ export async function dashboardAction({ request }) {
 }
 
 const Dashboard = () => {
-    const { userName, invoices } = useLoaderData()
+    const { userName, familyName, addChild } = useLoaderData()
 
     return (
         <>
@@ -67,31 +81,31 @@ const Dashboard = () => {
                 userName ? (
                     <div className="dashboard">
                         <h1>Welcome back, <span className="accent">{userName}</span></h1>
+
                         <div className="grid-sm">
                             {
-                                invoices && invoices.length > 0
+                                familyName && familyName.length > 0
                                     ? (
                                         < div className="grid-lg">
-
                                             <div className="flex-lg">
-                                                <AddChildForm />
+                                                <AddFamilyForm />
+                                                <AddChildForm familyName={familyName} />
                                             </div>
-
-                                            {/* EXISTING CHILDREN */}
-                                            <h2>Current Invoice Info</h2>
+                                            <h2>Existing Invoices</h2>
                                             <div className="budgets">
                                                 {
-                                                    invoices.map((invoice) => (
-                                                        <FamilyCard key={invoice.id} invoice={invoice} />
+                                                    familyName.map((family) => (
+                                                        <ChildSummary key={family.id} family={family} />
                                                     ))
                                                 }
                                             </div>
-
                                         </div>
+
+
                                     ) : (
                                         <div className="grid-sm">
-                                            <p>Add a Family Name below to get started.</p>
-                                            <AddChildForm />
+                                            <p>Add a family name below to get started.</p>
+                                            <AddFamilyForm />
                                         </div>
                                     )
                             }
