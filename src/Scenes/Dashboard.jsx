@@ -95,7 +95,7 @@ const Dashboard = () => {
                                             <h2>Existing Invoices</h2>
                                             <div className="invoices">
                                                 {
-                                                    addChild.map((child) => (
+                                                    addChild?.map((child) => (
                                                         <ChildSummary key={child.id} child={child} />
                                                     ))
                                                 }

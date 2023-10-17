@@ -14,7 +14,7 @@ export const deleteItem = ({ key }) => {
 // RANDOM COLOR
 const generateRandomColor = () => {
     const existingInvoiceLength = fetchData('familyName')?.length ?? 0;
-    return `${existingInvoiceLength * 23} 75% 30%`
+    return `${existingInvoiceLength * 34} 65% 50%`
 }
 
 // CREATE INVOICE
