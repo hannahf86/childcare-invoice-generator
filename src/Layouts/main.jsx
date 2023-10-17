@@ -4,19 +4,17 @@ import { Outlet, useLoaderData } from "react-router-dom";
 //  HELPERS
 import { fetchData } from "../Utilities/Helpers"
 
-// LOADERS
-export function mainLoader() {
-    const userName = fetchData("userName");
-    return { userName }
-}
-
 // COMPONENTS
 import Nav from '../Components/Nav'
 
 // ASSETS
 import kids from '../Assets/bottom.png'
 
-
+// LOADERS
+export function mainLoader() {
+    const userName = fetchData("userName");
+    return { userName }
+}
 
 const Main = () => {
     const { userName } = useLoaderData()

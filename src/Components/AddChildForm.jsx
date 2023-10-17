@@ -140,7 +140,7 @@ const AddChildForm = ({ familyName }) => {
                         </select>
                     </div>
 
-                    <div className='grid-xs' hidden={familyName.length === 1}>
+                    <div className='grid-xs'>
                         <label htmlFor='selectedFamily'>Family Selected</label>
                         <select
                             name='selectedFamily'
@@ -152,7 +152,7 @@ const AddChildForm = ({ familyName }) => {
                                     .map((familyName) => {
                                         return (
                                             <option key={familyName.id} value={familyName.id}>
-                                                {familyName.name}
+                                                {familyName.familyName}
                                             </option>
                                         )
                                     })
