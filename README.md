@@ -38,58 +38,41 @@ Users should be able to:
 ## My process
 
 - After learning more about the versatility of React-Router-DOM, I decided to apply this knowledge to a small project I had recently completed.
-  
+
 - I began by using the createBrowserRouter object to define my Outlet, loaders, path to the Dashboard, an Error page and an action to be able to logout.
+
 
 ### Built with
 
 - [React](https://reactjs.org/)
 - [React-Router-DOM](https://reactrouter.com/en/main)
 - [Vite](https://vitejs.dev/)
-- JSX
-- Custom CSS
+- [JSX](https://legacy.reactjs.org/docs/introducing-jsx.html)
+- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
 - [React Icons](https://react-icons.github.io/react-icons/)
+- [Toastify](https://developer.mozilla.org/en-US/docs/Web/CSS)
 - Mobile-first workflow
 
 
 ### What I learned
 
-I reinforced my knowledge of using simple APIs and CSS.
+I reinforced my knowledge of mapping through data and using conditional statements to create a reliable user experience. 
 
-I initially set out using fetch/then/catch to keep the code clean, but it wasn't working. In hindsight, I believe I was 
-making some careless errors, but my goal for this project was to be fast, so I decided I would use another project to revise 
-fetch/then/catch, and just use async/await for this one. However, this meant I had to add a couple more steps than was perhaps 
-necessary. Something to work on in the future for sure.
-
-I was particularly pleased with the position of the dice SVG, as it required a combination of relative/absolute positioning, 
-and utilising the Z axis. I was also happy I managed to achieve the desired result for the hover effect.
-
-```CSS
-.dice:hover {
-  box-shadow: 0 0 0.5em 0.25em var(--accent-color)
-}``` 
-
-Working with the designer's Figma file beside me was incredibly useful! It was a very useful exercise to be able to look at the exact 
-numbers used, and translate them into code. Something I particularly enjoyed was being able to see the exact sizes and measurements of
-the design, and translate them into em measurements to keep the design consistent and responsive.
-
-
-
-
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
+I learnt how to use key features of the React-Router-DOM, such as _action.
 
 ### Continued development
 
-Further development could include including user authentication and being able to save your favourite quotes. There could also be scope for setting times
-of day for certain quotes, or providing tags and themes for different situations.
+The next steps are to:
+- Finish error handling
+- Implement the facility to print, download, and share a professional looking invoice
+
+After this, I intend to make the app a completed full-stack project, where the data will be stored in a database and users can log in and save data.
 
 ## Author
 
 - Website - [Hannah Feehan](https://www.hannahfeehan.com)
 - Twitter - [@hannahfdev](https://www.twitter.com/hannahfdev)
 
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
-
 ## Acknowledgments
 
-Massive thank you to Joe Abell for helping with Firefox "aggressively" caching the API!
+Massive thank you to [Joe Abell](https://github.com/joseph-abell) for helping me fix some small errors I made along the way!
