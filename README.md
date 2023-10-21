@@ -28,7 +28,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshots/advice-generator-app-HERO.png)
+![](./scnsht_childcareInvoiceGenerator.png)
 
 ### Links
 
