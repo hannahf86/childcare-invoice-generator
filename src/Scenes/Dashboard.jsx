@@ -5,7 +5,7 @@ import { useLoaderData } from "react-router-dom";
 import Intro from "./Intro";
 import AddFamilyForm from "../Components/AddFamilyForm";
 import AddChildForm from "../Components/AddChildForm";
-import ChildSummary from "../Components/ChildSummary";
+import InvoiceSummary from "../Components/InvoiceSummary";
 // import Table from "../Components/Table";
 
 // TOAST
@@ -95,8 +95,8 @@ const Dashboard = () => {
                                             <h2>Existing Invoices</h2>
                                             <div className="invoices">
                                                 {
-                                                    addChild?.map((child) => (
-                                                        <ChildSummary key={child.id} child={child} />
+                                                    addChild?.map((child, surname) => (
+                                                        <InvoiceSummary key={child.id} child={child} />
                                                     ))
                                                 }
                                             </div>

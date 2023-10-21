@@ -53,11 +53,11 @@ export const addChild = ({
 export const totalWeeklyCost = (familyNameId) => {
     const famName = fetchData('addChild') ?? [];
     // 1 - check id matches family name
-    const weeklyCost = addChild.reduce((acc, child) => {
+    const weeklyCost = famName.reduce((acc, child) => {
         if (child.familyNameId !== familyNameId) return acc
 
         // 2- add current amount to total
-        return acc += child.amount
+        return acc += child.hoursPerWeek
     }, 0)
     return weeklyCost
 }
