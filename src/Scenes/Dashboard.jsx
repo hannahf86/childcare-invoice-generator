@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 // REACT-ROUTER-DOM 
 import { useLoaderData } from "react-router-dom";
 
@@ -13,6 +15,7 @@ import { toast } from "react-toastify";
 
 //  HELPERS
 import { fetchData, familyName, addChild, waait, } from "../Utilities/Helpers";
+import { useEffect } from "react";
 
 // LOADERS
 export function dashboardLoader() {
@@ -21,8 +24,6 @@ export function dashboardLoader() {
     const addChild = fetchData("addChild");
     return { userName, familyName, addChild }
 }
-
-
 
 
 // ACTIONS
@@ -75,6 +76,18 @@ export async function dashboardAction({ request }) {
 
 const Dashboard = () => {
     const { userName, familyName, addChild } = useLoaderData()
+    const [familyData, setFamilyData] = useState([]);
+
+    // Takes the raw data and makes it structured
+    useEffect(() => {
+        familyName?.length > 0 &&
+
+            // Puts everything from familyName and only the children with the matching fmilyNameId
+            setFamilyData(familyName.map(f => ({
+                ...f,
+                childrenArray: addChild?.filter(c => c.familyNameId === f.id) || []
+            })))
+    }, [familyName, addChild])
 
     return (
         <>
@@ -84,32 +97,28 @@ const Dashboard = () => {
                         <h1>Welcome back, <span className="accent">{userName}</span></h1>
 
                         <div className="grid-sm">
-                            {
-                                familyName && familyName.length > 0
-                                    ? (
-                                        < div className="grid-lg">
-                                            <div className="flex-lg">
-                                                <AddFamilyForm />
-                                                <AddChildForm familyName={familyName} />
-                                            </div>
-                                            <h2>Existing Invoices</h2>
-                                            <div className="invoices">
-                                                {
-                                                    addChild?.map((child) => (
-                                                        <InvoiceSummary key={child.id} child={child} />
-                                                    ))
-                                                }
-                                            </div>
-                                        </div>
+                            {!familyData && (
+                                <p>Add a family name below to get started.</p>
+                            )}
+                            <AddFamilyForm />
+                        </div>
+
+                        <div className="grid-sm">
+                            {familyData?.map(f => (
+                                <div className="grid-lg" key={f.id}>
+                                    <div className="flex-lg">
+                                        <AddChildForm familyName={familyName} />
+                                    </div>
+                                    <h2>Existing Invoices</h2>
+                                    <div className="invoices">
+                                        {
+                                            <InvoiceSummary familyName={f.familyName} childrenArray={f.childrenArray} />
+                                        }
+                                    </div>
+                                </div>
+                            ))}
 
 
-                                    ) : (
-                                        <div className="grid-sm">
-                                            <p>Add a family name below to get started.</p>
-                                            <AddFamilyForm />
-                                        </div>
-                                    )
-                            }
                         </div>
                     </div >
                 ) : <Intro />
