@@ -10,25 +10,27 @@ const Intro = () => {
             <div>
                 <h1>Make invoicing <span className='accent'>work for you</span></h1>
             </div>
-            <p>Personal invoicing service for childcare providers</p>
 
-            <Form method='post' >
-                <input
-                    type='text'
-                    name='userName'
-                    required
-                    placeholder='Enter your name'
-                    aria-label='Your name'
-                    autoComplete='given-name'
-                />
-                
-                {/* NEW USER SECRET INPUT */}
-                <input type='hidden' name='_action' value='newUser' />
+            <div className='intro-subtitle'>
+                <p>Personal invoicing service for childcare providers</p>
+                <Form method='post' >
+                    <input
+                        type='text'
+                        name='userName'
+                        required
+                        placeholder='Enter your name'
+                        aria-label='Your name'
+                        autoComplete='given-name'
+                    />
 
-                <button type='submit' className='btn btn--dark'>
-                    <HiUserAdd width={20} /><span>Create Account</span>
-                </button>
-            </Form>
+                    {/* NEW USER SECRET INPUT */}
+                    <input type='hidden' name='_action' value='newUser' />
+
+                    <button type='submit' className='btn btn--dark'>
+                        <HiUserAdd width={20} /><span>Create Account</span>
+                    </button>
+                </Form>
+            </div>
         </div>
     )
 }

@@ -4,7 +4,6 @@ import { useFetcher } from 'react-router-dom'
 // ASSETS
 import { HiPlus } from 'react-icons/hi'
 
-
 const AddChildForm = ({ familyName }) => {
 
     // stores the form's state
@@ -73,9 +72,7 @@ const AddChildForm = ({ familyName }) => {
     };
 
     const totalWeeklyHours = hours - fundingHours;
-    const total = totalWeeklyHours * rate
-
-
+    const total = totalWeeklyHours * rate;
 
     return (
         <div className='form-wrapper'>
