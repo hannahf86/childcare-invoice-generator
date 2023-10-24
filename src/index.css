@@ -464,16 +464,15 @@ select {
 .invoices {
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
+  display: grid;
   gap: var(--space-md);
+  max-width: 600px;
 }
 
 .invoice {
   --backdrop: var(--accent);
   display: inline-block;
-  max-width: 800px;
+  max-width: 600px;
   -webkit-box-shadow: 0.25em 0.3em 1em hsl(var(--muted) / 0.2);
   box-shadow: 0.25em 0.3em 1em hsl(var(--muted) / 0.2);
   background-color: var(--bkg);
@@ -520,6 +519,11 @@ ul {
 .list-item {
   margin-bottom: 1.2em;
   color: var(--font);
+}
+
+.utils-btn {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 /* error pages */

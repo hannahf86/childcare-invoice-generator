@@ -1,4 +1,10 @@
-import { useState } from 'react';
+import React, { useState, useRef } from 'react';
+
+// ICONS
+import { HiPrinter, HiShare, HiDownload } from 'react-icons/hi'
+
+// LIBRARIES
+import { useReactToPrint } from 'react-to-print'
 
 // REACT-ROUTER-DOM 
 import { useLoaderData } from "react-router-dom";
@@ -8,7 +14,6 @@ import Intro from "./Intro";
 import AddFamilyForm from "../Components/AddFamilyForm";
 import AddChildForm from "../Components/AddChildForm";
 import InvoiceSummary from "../Components/InvoiceSummary";
-// import Table from "../Components/Table";
 
 // TOAST
 import { toast } from "react-toastify";
@@ -24,7 +29,6 @@ export function dashboardLoader() {
     const addChild = fetchData("addChild");
     return { userName, familyName, addChild }
 }
-
 
 // ACTIONS
 
@@ -74,9 +78,18 @@ export async function dashboardAction({ request }) {
     }
 }
 
+
 const Dashboard = () => {
     const { userName, familyName, addChild } = useLoaderData()
     const [familyData, setFamilyData] = useState([]);
+
+    // PRINTING FUNCTION
+    const componentRef = useRef();
+    const handlePrint = useReactToPrint({
+        content: () => componentRef.current,
+        documentTitle: { familyName },
+        onAfterPrint: () => alert("Printing successful!")
+    })
 
     // Takes the raw data and makes it structured
     useEffect(() => {
@@ -109,11 +122,25 @@ const Dashboard = () => {
                                     <div className="flex-lg">
                                         <AddChildForm familyName={familyName} />
                                     </div>
+
                                     <h2>Existing Invoices</h2>
-                                    <div className="invoices">
+                                    <div className="invoices" ref={componentRef}>
                                         {
                                             <InvoiceSummary familyName={f.familyName} childrenArray={f.childrenArray} />
                                         }
+                                        <div className='utils-btn'>
+                                            <button onClick={handlePrint} className='btn'>
+                                                <HiPrinter size={25} />
+                                            </button>
+
+                                            <button onClick={handlePrint} className='btn'>
+                                                <HiShare size={25} />
+                                            </button>
+
+                                            <button onClick={handlePrint} className='btn'>
+                                                <HiDownload size={25} />
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             ))}

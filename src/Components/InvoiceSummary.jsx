@@ -11,9 +11,12 @@ const InvoiceSummary = ({ childrenArray, familyName }) => (
                     <p><strong>Age: </strong>{child.childsAge}</p>
                     <p><strong>Hours per Week: </strong>{child.hoursPerWeek}</p>
                     <p><strong>Funding: </strong>{child.funding}</p>
+                    <p>TOTAL GOES HERE</p>
                 </li>
             ))}
         </ul>
+
+
 
     </div>
 
