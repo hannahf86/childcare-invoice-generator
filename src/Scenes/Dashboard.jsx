@@ -1,10 +1,11 @@
 import React, { useState, useRef } from 'react';
 
 // ICONS
-import { HiPrinter, HiShare, HiDownload } from 'react-icons/hi'
+import { HiPrinter, HiDownload } from 'react-icons/hi'
 
 // LIBRARIES
 import { useReactToPrint } from 'react-to-print'
+import { EmailShareButton } from 'react-share';
 
 // REACT-ROUTER-DOM 
 import { useLoaderData } from "react-router-dom";
@@ -91,6 +92,9 @@ const Dashboard = () => {
         onAfterPrint: () => alert("Printing successful!")
     })
 
+    // DOWNLOAD FUNCTION
+
+
     // Takes the raw data and makes it structured
     useEffect(() => {
         familyName?.length > 0 &&
@@ -131,14 +135,6 @@ const Dashboard = () => {
                                         <div className='utils-btn'>
                                             <button onClick={handlePrint} className='btn'>
                                                 <HiPrinter size={25} />
-                                            </button>
-
-                                            <button onClick={handlePrint} className='btn'>
-                                                <HiShare size={25} />
-                                            </button>
-
-                                            <button onClick={handlePrint} className='btn'>
-                                                <HiDownload size={25} />
                                             </button>
                                         </div>
                                     </div>

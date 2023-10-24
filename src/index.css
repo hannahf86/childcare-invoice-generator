@@ -523,7 +523,7 @@ ul {
 
 .utils-btn {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: start;
 }
 
 /* error pages */
