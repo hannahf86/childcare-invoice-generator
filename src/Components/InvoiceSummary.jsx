@@ -1,8 +1,16 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
-const InvoiceSummary = ({ childrenArray, familyName }) => (
+    // --------------------------------
+    // THE MATHS...
 
-    <div className='invoice'>
+    // const total = totalWeeklyHours * rate;
+
+
+const InvoiceSummary = ({ childrenArray, familyName, }) => {
+
+
+    return (
+        <div className='invoice'>
         <h3 className='card-family-name'><strong>Name: </strong>{familyName}</h3>
         <ul className="card-text">
             {childrenArray.map(child => (
@@ -11,7 +19,7 @@ const InvoiceSummary = ({ childrenArray, familyName }) => (
                     <p><strong>Age: </strong>{child.childsAge}</p>
                     <p><strong>Hours per Week: </strong>{child.hoursPerWeek}</p>
                     <p><strong>Funding: </strong>{child.funding}</p>
-                    <p>TOTAL GOES HERE</p>
+                    <p></p>
                 </li>
             ))}
         </ul>
@@ -19,8 +27,9 @@ const InvoiceSummary = ({ childrenArray, familyName }) => (
 
 
     </div>
+    )
+}
 
-)
 
 
 export default InvoiceSummary

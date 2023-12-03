@@ -49,25 +49,3 @@ export const addChild = ({
     return localStorage.setItem('addChild', JSON.stringify([...existingChildren, newItem]))
 }
 
-// TOTAL WEEKLY COST
-// export const totalWeeklyCost = (familyNameId) => {
-//     const famName = fetchData('addChild') ?? [];
-//     // 1 - check id matches family name
-//     const weeklyCost = famName.reduce((acc, child) => {
-//         if (child.familyNameId !== familyNameId) return acc
-
-//         // 2- add current amount to total
-//         return acc += child.hoursPerWeek
-//     }, 0)
-//     return weeklyCost
-// }
-
-// FORMATTING
-
-// currency
-// export const formatCurrency = (amount) => {
-//     return amount.toLocaleString(undefined, {
-//         style: 'current',
-//         currency: "GBP"
-//     })
-// }

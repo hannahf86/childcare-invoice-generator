@@ -128,15 +128,14 @@ const Dashboard = () => {
                                     </div>
 
                                     <h2>Existing Invoices</h2>
-                                    <div className="invoices" ref={componentRef}>
+                                    <div className="invoices" >
                                         {
-                                            <InvoiceSummary familyName={f.familyName} childrenArray={f.childrenArray} />
+                                            <InvoiceSummary 
+                                            familyName={f.familyName} 
+                                            childrenArray={f.childrenArray} 
+                                            />
                                         }
-                                        {/* <div className='utils-btn'>
-                                            <button onClick={handlePrint} className='btn'>
-                                                <HiPrinter size={25} />
-                                            </button>
-                                        </div> */}
+                                       
                                     </div>
                                 </div>
                             ))}
