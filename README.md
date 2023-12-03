@@ -70,7 +70,7 @@ After this, I intend to make the app a completed full-stack project, where the d
 
 ## Author
 
-- Website - [Hannah Feehan](https://www.hannahfeehan.com)
+- Website - [Hannah Feehan](https://www.hannahfeehan.dev)
 - Twitter - [@hannahfdev](https://www.twitter.com/hannahfdev)
 
 ## Acknowledgments
