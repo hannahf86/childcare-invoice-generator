@@ -4,8 +4,8 @@ import React, { useState, useRef } from 'react';
 import { HiPrinter, HiDownload } from 'react-icons/hi'
 
 // LIBRARIES
-import { useReactToPrint } from 'react-to-print'
-import { EmailShareButton } from 'react-share';
+// import { useReactToPrint } from 'react-to-print'
+
 
 // REACT-ROUTER-DOM 
 import { useLoaderData } from "react-router-dom";
@@ -85,12 +85,12 @@ const Dashboard = () => {
     const [familyData, setFamilyData] = useState([]);
 
     // PRINTING FUNCTION
-    const componentRef = useRef();
-    const handlePrint = useReactToPrint({
-        content: () => componentRef.current,
-        documentTitle: { familyName },
-        onAfterPrint: () => alert("Printing successful!")
-    })
+    // const componentRef = useRef();
+    // const handlePrint = useReactToPrint({
+    //     content: () => componentRef.current,
+    //     documentTitle: { familyName },
+    //     onAfterPrint: () => alert("Printing successful!")
+    // })
 
     // DOWNLOAD FUNCTION
 
@@ -132,11 +132,11 @@ const Dashboard = () => {
                                         {
                                             <InvoiceSummary familyName={f.familyName} childrenArray={f.childrenArray} />
                                         }
-                                        <div className='utils-btn'>
+                                        {/* <div className='utils-btn'>
                                             <button onClick={handlePrint} className='btn'>
                                                 <HiPrinter size={25} />
                                             </button>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             ))}
